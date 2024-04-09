@@ -1,4 +1,4 @@
-package com.example.oxynews;
+package com.example.oxynews2;
 
 public class ArticleData {
     private String articleId;

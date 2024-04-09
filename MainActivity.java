@@ -1,4 +1,4 @@
-package com.example.oxynews;
+package com.example.oxynews2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
