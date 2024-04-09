@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">OxyNews</string>
+    <string name="action_settings">Settings</string>
+    <string name="article_title">Article Title</string>
+    <string name="article_author">Article Author</string>
+    <string name="article_date">Article Date</string>
+    <string name="article_text">Article Text</string>
+    <string name="final_article_author">Eliza Bodden</string>
+    <string name="final_article_date">April 2, 2024</string>
+    <string name="final_article_title">Study abroad more competitive than ever, many students denied for Fall 2024</string>
+    <string name="recommended_articles">Recommended Articles:</string>
+</resources>
