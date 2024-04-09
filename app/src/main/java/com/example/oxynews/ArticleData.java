@@ -31,6 +31,10 @@ public class ArticleData {
         this.tags = words[4].split(",");
     }
 
+    public String getArticleId(){
+        return this.articleId;
+    }
+
     public String getTitle(){
         return this.title;
     }
@@ -38,9 +42,18 @@ public class ArticleData {
     public String getAuthor(){
         return this.author;
     }
-    public String getDate(){
+
+    public Integer getDate(){
+        return this.date;
+    }
+
+    public String getDateToString(){
         String str = "";
-        str += (date / 10000) + "/" + ((date % 10000) / 100) + "/" + (date % 100);
+        str += ((date % 10000) / 100) + "/" + (date % 100) + "/" + (date / 10000);
         return str;
+    }
+
+    public String[] getTags(){
+        return this.tags;
     }
 }
