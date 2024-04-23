@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class MainActivity extends AppCompatActivity {
     String MY_FILE_NAME;
@@ -112,12 +114,15 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<ArticleData> searchByTitle(String str){
         ArrayList<ArticleData> result = new ArrayList<ArticleData>();
-        if(str.equals(" ")){
+        String[] words = str.split(" ");
+        if(words.length == 0){
             return result;
         }
         for(ArticleData article: articleArr){
-            if(article.getTitle().contains(str)){
-                result.add(article);
+            for(String word: words) {
+                if (article.getTitle().contains(word)) {
+                    result.add(article);
+                }
             }
         }
         return result;
@@ -125,29 +130,62 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<ArticleData> searchByAuthor(String str){
         ArrayList<ArticleData> result = new ArrayList<ArticleData>();
-        if(str.equals(" ")){
+        String[] words = str.split(" ");
+        if(words.length == 0){
             return result;
         }
         for(ArticleData article: articleArr){
-            if(article.getAuthor().contains(str)){
-                result.add(article);
-            }
-        }
-        return result;
-    }
-
-    public ArrayList<ArticleData> searchByTags(String str){
-        ArrayList<ArticleData> result = new ArrayList<ArticleData>();
-        if(str.equals(" ")){
-            return result;
-        }
-        for(ArticleData article: articleArr){
-            for(String tag: article.getTags()) {
-                if (tag.contains(str)) {
+            for(String word: words) {
+                if (article.getAuthor().contains(word)) {
                     result.add(article);
                 }
             }
         }
         return result;
+    }
+
+    public PriorityQueue<ArticleData> searchByTags(String str){
+        PriorityQueue<ArticleData> result = new PriorityQueue<ArticleData>(5, new ArticleSearchScoreComparator());
+        String[] words = str.split(" ");
+        if(words.length == 0){
+            return result;
+        }
+        for(ArticleData article: articleArr){
+            for(String word: words) {
+                for (String tag : article.getTags()) {
+                    if (tag.contains(word)) {
+                        result.add(article);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    class ArticleSearchScore{
+        private ArticleData article;
+        private Integer score;
+        public ArticleSearchScore(ArticleData article, Integer score){
+            this.article = article;
+            this.score = score;
+        }
+
+        public Integer getScore(){
+            return score;
+        }
+        public ArticleData getArticle(){
+            return article;
+        }
+    }
+
+    class ArticleSearchScoreComparator implements Comparator<ArticleSearchScore>{
+        public int compare(ArticleSearchScore article1, ArticleSearchScore article2){
+            if(article1.getScore() < article2.getScore()){
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
     }
 }
