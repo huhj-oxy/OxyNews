@@ -1,3 +1,5 @@
-articleId	title	author(s)	date	tags
-id1	Firtst Article	Benny	220225	stem,bio,chem
-id2	SecondArticle	Atlas P. Jenkins, Ainz	201208	poc,english
+articleId&&title&&author(s)&&date&&tags
+id1&&First Article&&Benny&&220225&&stem,bio,chem&&hello this is James. I don't know what I am type. But I am tired.
+id2&&SecondArticle&&Atlas P. Jenkins, Ainz&&201208&&poc,english&&Nice.
+id3&&Third Article&&James&&220714&&math,science&&Hello.
+id4&&Lessons Learned: College may not have been the 'best four years' of my life, but it forged me into a warrior&&Mall Abel&&240410&&tag&&They say college is supposed to be the best four years of your life. As a 17-years-old who was having a hard time in high school because of severe mental health issue.

@@ -9,4 +9,20 @@
     <string name="final_article_date">April 2, 2024</string>
     <string name="final_article_title">Study abroad more competitive than ever, many students denied for Fall 2024</string>
     <string name="recommended_articles">Recommended Articles:</string>
+    <string name="oxy_news">Oxy News</string>
+    <string name="search">Search</string>
+    <string name="options">Options</string>
+
+    <string-array name="article_card_titles">
+        <item>Article Title: Title of the Article</item>
+    </string-array>
+
+    <string-array name="article_card_authors">
+        <item>Article Author</item>
+    </string-array>
+
+    <string-array name="article_card_dates">
+        <item>Article Date</item>
+    </string-array>
+
 </resources>
