@@ -2,10 +2,15 @@ package com.example.oxynews;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -19,6 +24,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class HomeView extends AppCompatActivity {
+
+    //Settings Stuff
+    int mintextSize = 14;
+    int maxTextSize = 36;
+    int textSize = 20;
+    TextView fontSizeBox;
+
+
 
     ArrayList<ArticleData> articleArr = new ArrayList<ArticleData>();
 
@@ -82,4 +95,38 @@ public class HomeView extends AppCompatActivity {
         }
 
     }
-}
+
+
+    public void toSettings(View v){setContentView(R.layout.settings_menu);
+
+
+//        // code for fontsize
+//        fontSizeBox = findViewById(R.id.fontSizeBox);
+//        fontSizeBox.setText(String.valueOf(textSize));
+//        fontSizeBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    // Get the text from the EditText and parse it to an integer
+//                    String inputText = fontSizeBox.getText().toString();
+//                    try {
+//                        int newSize = Integer.parseInt(inputText);
+//                        // Update textSize with the new value
+//                        textSize = newSize;
+//                    } catch (NumberFormatException e) {
+//                        // Handle the case where inputText is not a valid integer
+//                        Toast.makeText(getApplicationContext(), "Invalid input", Toast.LENGTH_SHORT).show();
+//                    }
+//                    return true; // Return true to consume the event
+//                }
+//                return false; // Return false if you don't consume the event
+//            }
+//        });
+
+    } // end of toSettings
+
+    public void darkOn(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
+    public void darkOff(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);}
+
+
+
+}// end of HomeView

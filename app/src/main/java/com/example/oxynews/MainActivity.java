@@ -6,7 +6,11 @@ import androidx.cardview.widget.CardView;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
     TextView articleAuthor;
     TextView articleDate;
     TextView articleText;
+
+    //Settings Stuff
+    int mintextSize = 14;
+    int maxTextSize = 36;
+    int textSize = 20;
+    TextView fontSizeBox;
+
 
     public void readTsvFile(){
         try(InputStream stream = getResources().openRawResource(R.raw.test)){
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_view);
+        setContentView(R.layout.settings_menu);
 
         readTsvFile();
 
@@ -123,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return result;
     }
+
+
+
+
+
 
 //    public PriorityQueue<ArticleData> searchByTags(String str){
 //        PriorityQueue<ArticleData> result = new PriorityQueue<ArticleData>(5, new ArticleSearchScoreComparator());

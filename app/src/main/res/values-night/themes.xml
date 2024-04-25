@@ -1,7 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.OxyNews" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Base application theme for night mode. -->
+    <style name="Base.Theme.SettingsTest" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/black</item>
+        <!-- Add more customization attributes as needed -->
     </style>
 </resources>
