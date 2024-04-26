@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -111,6 +113,42 @@ public class HomeView extends AppCompatActivity {
 
     } // end of toSettings
 
+    //this one is for anything with a scrollView. It should work with all of the articles
+    public void updateTextSizeScroll(ScrollView layout) {
+
+        if(textSize < mintextSize){textSize = mintextSize;}
+        if(textSize > maxTextSize){textSize = maxTextSize;}
+
+        String desiredTag = "articleText";
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child.getTag() != null && child.getTag().equals(desiredTag) && child instanceof TextView) {
+                ((TextView) child).setTextSize(textSize);
+                child.setVisibility(View.VISIBLE);}}
+
+    }//end of updateTextSize
+
+    //this one is for anything with a constraintLayout if you want to update the textsize for it
+    public void updateTextSizeConstraint(ConstraintLayout layout) {
+        // example from openHomeView: updateTextSizeConstraint(findViewById(R.id.main));
+
+        if(textSize < mintextSize){textSize = mintextSize;}
+        if(textSize > maxTextSize){textSize = maxTextSize;}
+
+        String desiredTag = "articleText";
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+
+            if (child.getTag() != null && child.getTag().equals(desiredTag) && child instanceof TextView) {
+                ((TextView) child).setTextSize(textSize);
+                child.setVisibility(View.VISIBLE);}}
+
+    }//end of updateTextSize
+
+
+
     public void toMain(View v){openHomeView();}
 
     public void darkOn(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
@@ -119,6 +157,8 @@ public class HomeView extends AppCompatActivity {
     // needed to add this method because otherwise returning to the home page wouldn't work
     public void openHomeView(){
         setContentView(R.layout.activity_home_view);
+
+        updateTextSizeConstraint(findViewById(R.id.main));
 
         readTsvFile();
 
