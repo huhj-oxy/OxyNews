@@ -43,21 +43,8 @@ public class HomeView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home_view);
+        openHomeView();
 
-        readTsvFile();
-
-        RecyclerView recyclerView = findViewById(R.id.cardRecyclerView);
-
-        setUpArticleCardModels();
-
-        //Create adapter AFTER setting up ArticleCardModels
-        CardArticle_RecyclerViewAdapter adapter = new CardArticle_RecyclerViewAdapter(this,
-                articleCardModels);
-
-        //Attach adapter to our recyclerView
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -101,32 +88,52 @@ public class HomeView extends AppCompatActivity {
 
 
 //        // code for fontsize
-//        fontSizeBox = findViewById(R.id.fontSizeBox);
-//        fontSizeBox.setText(String.valueOf(textSize));
-//        fontSizeBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    // Get the text from the EditText and parse it to an integer
-//                    String inputText = fontSizeBox.getText().toString();
-//                    try {
-//                        int newSize = Integer.parseInt(inputText);
-//                        // Update textSize with the new value
-//                        textSize = newSize;
-//                    } catch (NumberFormatException e) {
-//                        // Handle the case where inputText is not a valid integer
-//                        Toast.makeText(getApplicationContext(), "Invalid input", Toast.LENGTH_SHORT).show();
-//                    }
-//                    return true; // Return true to consume the event
-//                }
-//                return false; // Return false if you don't consume the event
-//            }
-//        });
+        fontSizeBox = findViewById(R.id.fontSizeBox);
+        fontSizeBox.setText(String.valueOf(textSize));
+        fontSizeBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // Get the text from the EditText and parse it to an integer
+                    String inputText = fontSizeBox.getText().toString();
+                    try {
+                        int newSize = Integer.parseInt(inputText);
+                        // Update textSize with the new value
+                        textSize = newSize;
+                    } catch (NumberFormatException e) {
+                        // Handle the case where inputText is not a valid integer
+                        Toast.makeText(getApplicationContext(), "Invalid input", Toast.LENGTH_SHORT).show();
+                    }
+                    return true; // Return true to consume the event
+                }
+                return false; // Return false if you don't consume the event
+            }
+        });
 
     } // end of toSettings
+
+    public void toMain(View v){openHomeView();}
 
     public void darkOn(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
     public void darkOff(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);}
 
+    // needed to add this method because otherwise returning to the home page wouldn't work
+    public void openHomeView(){
+        setContentView(R.layout.activity_home_view);
+
+        readTsvFile();
+
+        RecyclerView recyclerView = findViewById(R.id.cardRecyclerView);
+
+        setUpArticleCardModels();
+
+        //Create adapter AFTER setting up ArticleCardModels
+        CardArticle_RecyclerViewAdapter adapter = new CardArticle_RecyclerViewAdapter(this,
+                articleCardModels);
+
+        //Attach adapter to our recyclerView
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
 
 }// end of HomeView
