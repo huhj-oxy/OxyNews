@@ -30,13 +30,6 @@ public class MainActivity extends AppCompatActivity {
     TextView articleTitle;
     TextView articleAuthor;
     TextView articleDate;
-    TextView articleText;
-
-    //Settings Stuff
-    int mintextSize = 14;
-    int maxTextSize = 36;
-    int textSize = 20;
-    TextView fontSizeBox;
 
 
     public void readTsvFile(){
