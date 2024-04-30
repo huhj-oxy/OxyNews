@@ -6,14 +6,16 @@ public class ArticleCardModel {
     String cardTitle;
     String cardAuthor;
     String cardDate;
+    String text;
     int image;
 
     //CREATE CONSTRUCTOR
-    public ArticleCardModel(String cardTitle, String cardAuthor, String cardDate, int image) {
+    public ArticleCardModel(String cardTitle, String cardAuthor, String cardDate, int image, String text) {
         this.cardTitle = cardTitle;
         this.cardAuthor = cardAuthor;
         this.cardDate = cardDate;
         this.image = image;
+        this.text = text;
     }
 
     //CREATE GETTER METHODS
@@ -31,5 +33,9 @@ public class ArticleCardModel {
 
     public int getImage() {
         return image;
+    }
+
+    public String getText(){
+        return text;
     }
 }

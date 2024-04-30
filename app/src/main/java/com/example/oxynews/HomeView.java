@@ -82,7 +82,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         //REPLACE '10' WITH LENGTH OF 'articleCardTitles' FOR ACTUAL APP
         for(int i = 0; i < articleArr.size(); i++){
             ArticleCardModel cm = new ArticleCardModel(articleArr.get(i).getTitle(), articleArr.get(i).getAuthor(),
-                    articleArr.get(i).getDateToString(), articleCardImages[0]);
+                    articleArr.get(i).getDateToString(), articleCardImages[0], articleArr.get(i).getText());
             articleCardModels.add(cm);
         }
 
@@ -193,7 +193,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         intent.putExtra("TITLE", articleCardModels.get(position).getCardTitle());
         intent.putExtra("AUTHOR", articleCardModels.get(position).getCardAuthor());
         intent.putExtra("DATE", articleCardModels.get(position).getCardDate());
-        intent.putExtra("TEXT", "Hello There!");
+        intent.putExtra("TEXT", articleCardModels.get(position).getText());
 
         startActivity(intent);
     }
