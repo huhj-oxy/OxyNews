@@ -1,5 +1,6 @@
 package com.example.oxynews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,13 +20,15 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class HomeView extends AppCompatActivity {
+public class HomeView extends AppCompatActivity implements RecyclerViewInterface{
 
     //Settings Stuff
     int mintextSize = 14;
@@ -168,7 +171,7 @@ public class HomeView extends AppCompatActivity {
 
         //Create adapter AFTER setting up ArticleCardModels
         CardArticle_RecyclerViewAdapter adapter = new CardArticle_RecyclerViewAdapter(this,
-                articleCardModels);
+                articleCardModels, this);
 
         //Attach adapter to our recyclerView
         recyclerView.setAdapter(adapter);
@@ -176,4 +179,17 @@ public class HomeView extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(HomeView.this, ArticleFullView.class);
+
+        //Log.w("HomeView", "onItemClick: CLICKED");
+
+        intent.putExtra("TITLE", articleCardModels.get(position).getCardTitle());
+        intent.putExtra("AUTHOR", articleCardModels.get(position).getCardAuthor());
+        intent.putExtra("DATE", articleCardModels.get(position).getCardDate());
+        intent.putExtra("TEXT", "Hello There!");
+
+        startActivity(intent);
+    }
 }// end of HomeView
