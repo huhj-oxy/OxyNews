@@ -163,11 +163,16 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
         updateTextSizeConstraint(findViewById(R.id.main));
 
+        //CLEAR articleArr before reading TSV file
+        articleArr.clear();
         readTsvFile();
 
         RecyclerView recyclerView = findViewById(R.id.cardRecyclerView);
 
+        //CLEAR articleCardModels before setting it up
+        articleCardModels.clear();
         setUpArticleCardModels();
+
 
         //Create adapter AFTER setting up ArticleCardModels
         CardArticle_RecyclerViewAdapter adapter = new CardArticle_RecyclerViewAdapter(this,
