@@ -46,7 +46,7 @@
             android:layout_marginTop="53dp"
             android:text="Font Size"
             android:textAlignment="center"
-            android:textSize="26sp"
+            android:textSize="26.5sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

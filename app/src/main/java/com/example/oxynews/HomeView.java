@@ -6,21 +6,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ScrollView;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -29,13 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class HomeView extends AppCompatActivity implements RecyclerViewInterface{
-
-    //Settings Stuff
-    int mintextSize = 14;
-    int maxTextSize = 36;
-    int textSize = 20;
-    TextView fontSizeBox;
-
 
 
     ArrayList<ArticleData> articleArr = new ArrayList<ArticleData>();
@@ -91,64 +76,26 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
     public void toSettings(View v){setContentView(R.layout.settings_menu);
 
+        EditText fontSizeBox = findViewById(R.id.fontSizeBox);
 
-//        // code for fontsize
-        fontSizeBox = findViewById(R.id.fontSizeBox);
-        fontSizeBox.setText(String.valueOf(textSize));
+        float currentTextSize = TextSizeSingleton.getInstance().getCurrentTextSize();
+        fontSizeBox.setText(String.valueOf(currentTextSize));
+
         fontSizeBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    // Get the text from the EditText and parse it to an integer
-                    String inputText = fontSizeBox.getText().toString();
-                    try {
-                        int newSize = Integer.parseInt(inputText);
-                        // Update textSize with the new value
-                        textSize = newSize;
-                    } catch (NumberFormatException e) {
-                        // Handle the case where inputText is not a valid integer
-                        Toast.makeText(getApplicationContext(), "Invalid input", Toast.LENGTH_SHORT).show();
-                    }
-                    return true; // Return true to consume the event
+                    float newSize = Float.parseFloat(fontSizeBox.getText().toString());
+                    TextSizeSingleton.getInstance().setCurrentTextSize(newSize);
+                    return true;
                 }
-                return false; // Return false if you don't consume the event
+                return false;
             }
         });
 
+
     } // end of toSettings
 
-    //this one is for anything with a scrollView. It should work with all of the articles
-    public void updateTextSizeScroll(ScrollView layout) {
-
-        if(textSize < mintextSize){textSize = mintextSize;}
-        if(textSize > maxTextSize){textSize = maxTextSize;}
-
-        String desiredTag = "articleText";
-
-        for (int i = 0; i < layout.getChildCount(); i++) {
-            View child = layout.getChildAt(i);
-            if (child.getTag() != null && child.getTag().equals(desiredTag) && child instanceof TextView) {
-                ((TextView) child).setTextSize(textSize);
-                child.setVisibility(View.VISIBLE);}}
-
-    }//end of updateTextSize
-
-    //this one is for anything with a constraintLayout if you want to update the textsize for it
-    public void updateTextSizeConstraint(ConstraintLayout layout) {
-        // example from openHomeView: updateTextSizeConstraint(findViewById(R.id.main));
-
-        if(textSize < mintextSize){textSize = mintextSize;}
-        if(textSize > maxTextSize){textSize = maxTextSize;}
-
-        String desiredTag = "articleText";
-
-        for (int i = 0; i < layout.getChildCount(); i++) {
-            View child = layout.getChildAt(i);
-
-            if (child.getTag() != null && child.getTag().equals(desiredTag) && child instanceof TextView) {
-                ((TextView) child).setTextSize(textSize);
-                child.setVisibility(View.VISIBLE);}}
-
-    }//end of updateTextSize
 
 
 
@@ -161,7 +108,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
     public void openHomeView(){
         setContentView(R.layout.activity_home_view);
 
-        updateTextSizeConstraint(findViewById(R.id.main));
+        //updateTextSizeConstraint(findViewById(R.id.main));
 
         //CLEAR articleArr before reading TSV file
         articleArr.clear();
@@ -198,3 +145,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         startActivity(intent);
     }
 }// end of HomeView
+
+
+
+

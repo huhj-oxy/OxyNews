@@ -10,6 +10,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.os.Bundle;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+
 public class ArticleFullView extends AppCompatActivity {
 
     //DECLARE CLASS VARIABLES
@@ -26,6 +33,11 @@ public class ArticleFullView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_article_full_view);
+
+
+        // Get the current text size from the TextSizeSingleton
+        float currentTextSize = TextSizeSingleton.getInstance().getCurrentTextSize();
+
 
         //GET INTENTS FROM HOMEVIEW
         String title = getIntent().getStringExtra("TITLE");
@@ -45,6 +57,9 @@ public class ArticleFullView extends AppCompatActivity {
         articleTitle.setText(title);
         articleAuthor.setText(author);
         articleDate.setText(date);
+
+        // Apply current text size to articleText
+        articleText.setTextSize(currentTextSize);
 
     }
 }
