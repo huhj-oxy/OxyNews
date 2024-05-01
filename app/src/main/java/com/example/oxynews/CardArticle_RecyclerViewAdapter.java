@@ -76,7 +76,10 @@ public class CardArticle_RecyclerViewAdapter extends RecyclerView.Adapter<CardAr
 
 
             if(currentTextSize > 30f){titleSize = 30f;}
-            else {titleSize = currentTextSize;}
+            else if (currentTextSize < 20f) { titleSize = 20f;}
+            else{titleSize =currentTextSize;}
+
+
             cardArticleTitle.setTextSize(titleSize);
 
             dateAuthorSize = titleSize - 10;
