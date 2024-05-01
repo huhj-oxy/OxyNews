@@ -65,12 +65,11 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
     private void setUpArticleCardModels(){
         //REPLACE '10' WITH LENGTH OF 'articleCardTitles' FOR ACTUAL APP
-        for(int i = 0; i < articleArr.size(); i++){
+        for(int i = 1; i < articleArr.size(); i++){
             ArticleCardModel cm = new ArticleCardModel(articleArr.get(i).getTitle(), articleArr.get(i).getAuthor(),
                     articleArr.get(i).getDateToString(), articleCardImages[0], articleArr.get(i).getText());
             articleCardModels.add(cm);
         }
-
     }
 
 
