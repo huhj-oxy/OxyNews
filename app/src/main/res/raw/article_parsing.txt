@@ -10,14 +10,14 @@ def extract_article_info(url):
     title = article.title
     author = article.authors[0] if article.authors else "Unknown Author"
     date = article.publish_date.strftime('%y%m%d') if article.publish_date else "UnknownDate"
-    text = article.text.replace("\n", " ")
+    text = article.text.replace("\n", "\\n\\n")  # Replace blank lines with \n\n
 
     return title, author, date, text
 
 # Example usage
-url = "https://theoccidentalnews.com/sports/2024/04/10/in-first-competition-in-8-years-dance-team-comes-home-victorious/2912307"
+url = ""
 title, author, date, text = extract_article_info(url)
 
 # Write the extracted information to a text file
 with open("news_article.txt", "w") as file:
-    file.write(f"{title}&&{author}&&{date}&&{text}")
+    file.write(f"{title}&&{author}&&{date}&&tag&&{text}")
