@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class HomeView extends AppCompatActivity implements RecyclerViewInterface{
 
@@ -34,8 +35,32 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         super.onCreate(savedInstanceState);
         //EdgeToEdge.enable(this);
         openHomeView();
+    }
 
+    public void searchByTitle(String search){
+        PriorityQueue<ArticleSearchScore> result = Search.searchByTitle(articleArr, search);
 
+        articleCardModels.clear();
+
+        while(!result.isEmpty()){
+            ArticleData article = result.poll().getArticle();
+            ArticleCardModel cm = new ArticleCardModel(article.getTitle(), article.getAuthor(),
+                    article.getDateToString(), articleCardImages[0], article.getText());
+            articleCardModels.add(cm);
+        }
+    }
+
+    public void searchByAuthor(String search){
+        PriorityQueue<ArticleSearchScore> result = Search.searchByAuthor(articleArr, search);
+
+        articleCardModels.clear();
+
+        while(!result.isEmpty()){
+            ArticleData article = result.poll().getArticle();
+            ArticleCardModel cm = new ArticleCardModel(article.getTitle(), article.getAuthor(),
+                    article.getDateToString(), articleCardImages[0], article.getText());
+            articleCardModels.add(cm);
+        }
     }
 
     public void readTsvFile(){
@@ -119,6 +144,8 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         articleCardModels.clear();
         setUpArticleCardModels();
 
+        searchByTitle("");
+        searchByAuthor("James");
 
         //Create adapter AFTER setting up ArticleCardModels
         CardArticle_RecyclerViewAdapter adapter = new CardArticle_RecyclerViewAdapter(this,
