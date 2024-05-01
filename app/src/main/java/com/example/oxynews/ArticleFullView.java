@@ -45,6 +45,9 @@ public class ArticleFullView extends AppCompatActivity {
         String date = getIntent().getStringExtra("DATE");
         String text = getIntent().getStringExtra("TEXT");
 
+        // Replace the "\\n\\n" with actual line breaks
+        text = text.replace("\\n\\n", "\n\n");
+
         //MATCH VARIABLES TO THEIR LAYOUT ID's
         articleScrollView = findViewById(R.id.articleScrollView);
         articleTitle = findViewById(R.id.articleTitle);

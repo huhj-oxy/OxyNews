@@ -47,11 +47,11 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
             while((line = reader.readLine()) != null) {
                 if (lineCounter >= 1) {
                     String[] words = line.split("&&");
-                    Log.i("XXXXX", words[0]);
-                    Log.i("XXXXX", words[1]);
-                    Log.i("XXXXX", words[2]);
-                    Log.i("XXXXX", words[3]);
-                    Log.i("XXXXX", words[4]);
+//                    Log.i("XXXXX", words[0]);
+//                    Log.i("XXXXX", words[1]);
+//                    Log.i("XXXXX", words[2]);
+//                    Log.i("XXXXX", words[3]);
+//                    Log.i("XXXXX", words[4]);
 
                     ArticleData article = new ArticleData(words);
                     articleArr.add(article);

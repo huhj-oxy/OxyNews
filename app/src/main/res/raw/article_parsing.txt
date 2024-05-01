@@ -9,8 +9,8 @@ def extract_article_info(url):
 
     title = article.title
     author = article.authors[0] if article.authors else "Unknown Author"
-    date = article.publish_date.strftime('%Y-%m-%d') if article.publish_date else "Unknown Date"
-    text = article.text
+    date = article.publish_date.strftime('%y%m%d') if article.publish_date else "UnknownDate"
+    text = article.text.replace("\n", " ")
 
     return title, author, date, text
 
