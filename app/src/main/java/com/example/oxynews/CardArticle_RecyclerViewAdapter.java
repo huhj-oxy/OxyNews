@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class CardArticle_RecyclerViewAdapter extends RecyclerView.Adapter<CardArticle_RecyclerViewAdapter.MyViewHolder> {
 
+
     private final RecyclerViewInterface recyclerViewInterface;
     Context context;
     ArrayList<ArticleCardModel> articleCardModels;
@@ -54,6 +55,9 @@ public class CardArticle_RecyclerViewAdapter extends RecyclerView.Adapter<CardAr
         //GRABBING VIEWS FROM 'recycler_view_card.xml' AND ASSIGNING THEM VARIABLES
         //kinda like onCreate method
 
+        float titleSize;
+        float dateAuthorSize;
+
         ImageView imageView;
         TextView cardArticleTitle, cardArticleAuthor, cardArticleDate;
 
@@ -64,6 +68,21 @@ public class CardArticle_RecyclerViewAdapter extends RecyclerView.Adapter<CardAr
             cardArticleTitle = itemView.findViewById(R.id.cardTitle);
             cardArticleAuthor = itemView.findViewById(R.id.cardAuthor);
             cardArticleDate = itemView.findViewById(R.id.cardDate);
+
+
+            //font size stuff for cards
+            // Get the current text size from the TextSizeSingleton
+            float currentTextSize = TextSizeSingleton.getInstance().getCurrentTextSize();
+
+
+            if(currentTextSize > 30f){titleSize = 30f;}
+            else {titleSize = currentTextSize;}
+            cardArticleTitle.setTextSize(titleSize);
+
+            dateAuthorSize = titleSize - 10;
+
+            cardArticleAuthor.setTextSize(dateAuthorSize);
+            cardArticleDate.setTextSize(dateAuthorSize);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -21,7 +21,7 @@ public class TextSizeSingleton {
 
     private TextSizeSingleton() {
         // Initialize default values
-        currentTextSize = 20f; // Default text size
+        currentTextSize = 24f; // Default text size
         minTextSize = 15f;     // Minimum text size
         maxTextSize = 40.0f;   // Maximum text size
     }
