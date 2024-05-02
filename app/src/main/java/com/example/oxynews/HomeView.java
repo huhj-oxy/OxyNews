@@ -55,9 +55,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         noResult = findViewById(R.id.noResult);
         homeButton = findViewById(R.id.refreshButton);
 
-        //updateTextSizeConstraint(findViewById(R.id.main));
         noResult.setVisibility(View.INVISIBLE);
-        homeButton.setVisibility(View.INVISIBLE);
 
         //CLEAR articleArr before reading TSV file
         articleArr.clear();
@@ -88,7 +86,6 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
                 if(articleCardModels.isEmpty()){
                     noResult.setVisibility(View.VISIBLE);
-                    homeButton.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -119,7 +116,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         while(!result.isEmpty()){
             ArticleData article = result.poll().getArticle();
             ArticleCardModel cm = new ArticleCardModel(article.getTitle(), article.getAuthor(),
-                    article.getDateToString(), articleCardImages[0], article.getText());
+                    article.getDateToString(), article.getImage(), article.getText());
             articleCardModels.add(cm);
         }
         adapter.notifyDataSetChanged();
@@ -143,6 +140,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
 
             int lineCounter = 0;
+            int imageCounter = 1;
             String line;
             while((line = reader.readLine()) != null) {
                 if (lineCounter >= 1) {
@@ -153,8 +151,9 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
                     Log.i("XXXXX", words[3]);
                     Log.i("XXXXX", words[4]);
 
-                    ArticleData article = new ArticleData(words);
+                    ArticleData article = new ArticleData(words, articleCardImages[imageCounter]);
                     articleArr.add(article);
+                    imageCounter++;
                 }
                 lineCounter++;
             }

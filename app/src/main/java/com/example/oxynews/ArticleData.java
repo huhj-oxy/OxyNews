@@ -7,6 +7,7 @@ public class ArticleData {
     private Integer date;
     private String[] tags;
     private String text;
+    private int image;
 
     public ArticleData(){
         this.articleId = "";
@@ -24,6 +25,16 @@ public class ArticleData {
         this.date = Integer.parseInt(words[3]);
         this.tags = words[4].split(",");
         this.text = words[5];
+    }
+
+    public ArticleData(String[] words, int image){
+        this.articleId = words[0];
+        this.title = words[1];
+        this.author = words[2];
+        this.date = Integer.parseInt(words[3]);
+        this.tags = words[4].split(",");
+        this.text = words[5];
+        this.image = image;
     }
 
     public String getArticleId(){
@@ -53,4 +64,6 @@ public class ArticleData {
     }
 
     public String getText(){return this.text;}
+
+    public int getImage(){return this.image;}
 }
