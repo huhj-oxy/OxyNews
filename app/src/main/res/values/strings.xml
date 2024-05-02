@@ -12,6 +12,9 @@
     <string name="oxy_news">Oxy News</string>
     <string name="search">Search</string>
     <string name="options">Options</string>
+    <string name="search_titles">Search titles...</string>
+    <string name="no_result_found">No result found.</string>
+    <string name="home">Home</string>
 
     <string-array name="article_card_titles">
         <item>Article Title: Title of the Article</item>

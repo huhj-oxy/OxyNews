@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,19 +25,89 @@ import java.util.PriorityQueue;
 
 public class HomeView extends AppCompatActivity implements RecyclerViewInterface{
 
+    CardArticle_RecyclerViewAdapter adapter;
 
-    ArrayList<ArticleData> articleArr = new ArrayList<ArticleData>();
+    ArrayList<ArticleData> articleArr = new ArrayList<>();
 
     ArrayList<ArticleCardModel> articleCardModels = new ArrayList<>();
 
     int[] articleCardImages = {R.drawable.option};
 
+    EditText userSearch;
+    ImageView searchImage;
+    ImageView gearIcon;
+    TextView noResult;
+    Button homeButton;
+    String query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //EdgeToEdge.enable(this);
-        openHomeView();
-    }
+        setContentView(R.layout.activity_home_view);
+
+        //LINK ID's
+        userSearch = findViewById(R.id.searchText);
+        searchImage = findViewById(R.id.searchImage);
+        gearIcon = findViewById(R.id.toSettings);
+        noResult = findViewById(R.id.noResult);
+        homeButton = findViewById(R.id.refreshButton);
+
+        //updateTextSizeConstraint(findViewById(R.id.main));
+        noResult.setVisibility(View.INVISIBLE);
+        homeButton.setVisibility(View.INVISIBLE);
+
+        //CLEAR articleArr before reading TSV file
+        articleArr.clear();
+        readTsvFile();
+
+        RecyclerView recyclerView = findViewById(R.id.cardRecyclerView);
+
+        //CLEAR articleCardModels before setting it up
+        articleCardModels.clear();
+        setUpArticleCardModels();
+
+        //searchByTitle("");
+        //searchByAuthor("James");
+
+        //Create adapter AFTER setting up ArticleCardModels
+        adapter = new CardArticle_RecyclerViewAdapter(this,
+                articleCardModels, this);
+
+        //Attach adapter to our recyclerView
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        searchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                query = userSearch.getText().toString();
+                searchByTitle(query);
+
+                if(articleCardModels.isEmpty()){
+                    noResult.setVisibility(View.VISIBLE);
+                    homeButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        gearIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeView.this, MainActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recreate();
+            }
+        });
+
+    }//END onCreate
 
     public void searchByTitle(String search){
         PriorityQueue<ArticleSearchScore> result = Search.searchByTitle(articleArr, search);
@@ -48,6 +120,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
                     article.getDateToString(), articleCardImages[0], article.getText());
             articleCardModels.add(cm);
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void searchByAuthor(String search){
@@ -97,66 +170,6 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         }
     }
 
-
-    public void toSettings(View v){setContentView(R.layout.settings_menu);
-
-        EditText fontSizeBox = findViewById(R.id.fontSizeBox);
-
-        float currentTextSize = TextSizeSingleton.getInstance().getCurrentTextSize();
-        fontSizeBox.setText(String.valueOf(currentTextSize));
-
-        fontSizeBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    float newSize = Float.parseFloat(fontSizeBox.getText().toString());
-                    TextSizeSingleton.getInstance().setCurrentTextSize(newSize);
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-    } // end of toSettings
-
-
-
-
-    public void toMain(View v){openHomeView();}
-
-    public void darkOn(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
-    public void darkOff(View v){AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);}
-
-    // needed to add this method because otherwise returning to the home page wouldn't work
-    public void openHomeView(){
-        setContentView(R.layout.activity_home_view);
-
-        //updateTextSizeConstraint(findViewById(R.id.main));
-
-        //CLEAR articleArr before reading TSV file
-        articleArr.clear();
-        readTsvFile();
-
-        RecyclerView recyclerView = findViewById(R.id.cardRecyclerView);
-
-        //CLEAR articleCardModels before setting it up
-        articleCardModels.clear();
-        setUpArticleCardModels();
-
-        searchByTitle("");
-        searchByAuthor("James");
-
-        //Create adapter AFTER setting up ArticleCardModels
-        CardArticle_RecyclerViewAdapter adapter = new CardArticle_RecyclerViewAdapter(this,
-                articleCardModels, this);
-
-        //Attach adapter to our recyclerView
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(HomeView.this, ArticleFullView.class);
@@ -170,7 +183,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
         startActivity(intent);
     }
-}// end of HomeView
+}// end of HomeView class
 
 
 

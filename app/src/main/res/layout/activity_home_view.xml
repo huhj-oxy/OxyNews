@@ -25,7 +25,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:contentDescription="@string/options"
-        android:onClick="toSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +45,50 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cardRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="543dp"
+        android:layout_width="405dp"
+        android:layout_height="548dp"
         android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toSettings" />
+
+    <EditText
+        android:id="@+id/searchText"
+        android:layout_width="226dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/search_titles"
+        app:layout_constraintBottom_toTopOf="@+id/cardRecyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/toSettings"
+        app:layout_constraintStart_toEndOf="@+id/searchImage"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
+
+    <TextView
+        android:id="@+id/noResult"
+        android:layout_width="222dp"
+        android:layout_height="48dp"
+        android:text="@string/no_result_found"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardRecyclerView"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="118dp"
+        android:layout_height="54dp"
+        android:text="@string/home"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toEndOf="@+id/noResult"
+        app:layout_constraintTop_toBottomOf="@+id/toSettings"
+        app:layout_constraintVertical_bias="0.029" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
