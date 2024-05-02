@@ -22,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="156dp"
-            android:onClick="toMain"
             android:text="Return to Main Menu"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="81dp"
             android:layout_marginTop="21dp"
-            android:onClick="darkOn"
             android:text="Dark On"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/darkmodeTextView" />
@@ -69,8 +67,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="61dp"
+<<<<<<< HEAD
             android:layout_marginTop="20dp"
             android:onClick="darkOff"
+=======
+            android:layout_marginTop="21dp"
+>>>>>>> origin/alternate_layout_search
             android:text="Dark Off"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.028"

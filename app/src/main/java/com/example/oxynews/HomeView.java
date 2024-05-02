@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +24,9 @@ import java.util.ArrayList;
 
 public class HomeView extends AppCompatActivity implements RecyclerViewInterface{
 
+    CardArticle_RecyclerViewAdapter adapter;
 
-    ArrayList<ArticleData> articleArr = new ArrayList<ArticleData>();
+    ArrayList<ArticleData> articleArr = new ArrayList<>();
 
     ArrayList<ArticleCardModel> articleCardModels = new ArrayList<>();
 
@@ -31,13 +34,112 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
             R.drawable.image_three, R.drawable.image_four, R.drawable.image_five, R.drawable.image_six
             , R.drawable.image_seven, R.drawable.image_eight, R.drawable.image_nine};
 
+    EditText userSearch;
+    ImageView searchImage;
+    ImageView gearIcon;
+    TextView noResult;
+    Button homeButton;
+    String query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //EdgeToEdge.enable(this);
+<<<<<<< HEAD
         openHomeView();
+=======
+        setContentView(R.layout.activity_home_view);
+
+        //LINK ID's
+        userSearch = findViewById(R.id.searchText);
+        searchImage = findViewById(R.id.searchImage);
+        gearIcon = findViewById(R.id.toSettings);
+        noResult = findViewById(R.id.noResult);
+        homeButton = findViewById(R.id.refreshButton);
+
+        //updateTextSizeConstraint(findViewById(R.id.main));
+        noResult.setVisibility(View.INVISIBLE);
+        homeButton.setVisibility(View.INVISIBLE);
+
+        //CLEAR articleArr before reading TSV file
+        articleArr.clear();
+        readTsvFile();
+
+        RecyclerView recyclerView = findViewById(R.id.cardRecyclerView);
+
+        //CLEAR articleCardModels before setting it up
+        articleCardModels.clear();
+        setUpArticleCardModels();
+
+        //searchByTitle("");
+        //searchByAuthor("James");
+
+        //Create adapter AFTER setting up ArticleCardModels
+        adapter = new CardArticle_RecyclerViewAdapter(this,
+                articleCardModels, this);
+
+        //Attach adapter to our recyclerView
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        searchImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                query = userSearch.getText().toString();
+                searchByTitle(query);
+
+                if(articleCardModels.isEmpty()){
+                    noResult.setVisibility(View.VISIBLE);
+                    homeButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        gearIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeView.this, MainActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recreate();
+            }
+        });
+
+    }//END onCreate
+>>>>>>> origin/alternate_layout_search
 
 
+<<<<<<< HEAD
+=======
+        articleCardModels.clear();
+
+        while(!result.isEmpty()){
+            ArticleData article = result.poll().getArticle();
+            ArticleCardModel cm = new ArticleCardModel(article.getTitle(), article.getAuthor(),
+                    article.getDateToString(), articleCardImages[0], article.getText());
+            articleCardModels.add(cm);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void searchByAuthor(String search){
+        PriorityQueue<ArticleSearchScore> result = Search.searchByAuthor(articleArr, search);
+
+        articleCardModels.clear();
+
+        while(!result.isEmpty()){
+            ArticleData article = result.poll().getArticle();
+            ArticleCardModel cm = new ArticleCardModel(article.getTitle(), article.getAuthor(),
+                    article.getDateToString(), articleCardImages[0], article.getText());
+            articleCardModels.add(cm);
+        }
+>>>>>>> origin/alternate_layout_search
     }
 
     public void readTsvFile(){
@@ -74,6 +176,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         }
     }
 
+<<<<<<< HEAD
 
     public void toSettings(View v){setContentView(R.layout.settings_menu);
 
@@ -132,6 +235,8 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
     }
 
 
+=======
+>>>>>>> origin/alternate_layout_search
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(HomeView.this, ArticleFullView.class);
@@ -145,7 +250,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
         startActivity(intent);
     }
-}// end of HomeView
+}// end of HomeView class
 
 
 
