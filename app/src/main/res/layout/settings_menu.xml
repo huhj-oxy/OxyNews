@@ -10,6 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/fontSizeTextView"
+        app:layout_constraintStart_toEndOf="@+id/fontSizeTextView"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="273dp">
 
@@ -19,10 +21,10 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="68dp"
             android:layout_marginTop="156dp"
             android:text="Return to Main Menu"
             android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/darkOnButton" />
 
@@ -34,6 +36,7 @@
             android:layout_marginTop="40dp"
             android:ems="10"
             android:inputType="numberDecimal"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/fontSizeTextView"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -41,8 +44,8 @@
             android:id="@+id/fontSizeTextView"
             android:layout_width="195dp"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="53dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
             android:text="Font Size"
             android:textAlignment="center"
             android:textSize="26.5sp"
@@ -54,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="81dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="20dp"
             android:text="Dark On"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/darkmodeTextView" />
@@ -64,8 +67,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="61dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="20dp"
             android:text="Dark Off"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.028"
             app:layout_constraintStart_toEndOf="@+id/darkOnButton"
             app:layout_constraintTop_toBottomOf="@+id/darkmodeTextView" />
 

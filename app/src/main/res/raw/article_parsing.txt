@@ -1,0 +1,23 @@
+!pip install newspaper3k
+
+from newspaper import Article
+
+def extract_article_info(url):
+    article = Article(url)
+    article.download()
+    article.parse()
+
+    title = article.title
+    author = article.authors[0] if article.authors else "Unknown Author"
+    date = article.publish_date.strftime('%y%m%d') if article.publish_date else "UnknownDate"
+    text = article.text.replace("\n", "\\n\\n")  # Replace blank lines with \n\n
+
+    return title, author, date, text
+
+# Example usage
+url = ""
+title, author, date, text = extract_article_info(url)
+
+# Write the extracted information to a text file
+with open("news_article.txt", "w") as file:
+    file.write(f"{title}&&{author}&&{date}&&tag&&{text}")

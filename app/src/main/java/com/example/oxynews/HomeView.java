@@ -31,7 +31,9 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
 
     ArrayList<ArticleCardModel> articleCardModels = new ArrayList<>();
 
-    int[] articleCardImages = {R.drawable.option};
+    int[] articleCardImages = {R.drawable.option, R.drawable.first_image, R.drawable.image_two,
+            R.drawable.image_three, R.drawable.image_four, R.drawable.image_five, R.drawable.image_six
+            , R.drawable.image_seven, R.drawable.image_eight, R.drawable.image_nine};
 
     EditText userSearch;
     ImageView searchImage;
@@ -165,7 +167,7 @@ public class HomeView extends AppCompatActivity implements RecyclerViewInterface
         //REPLACE '10' WITH LENGTH OF 'articleCardTitles' FOR ACTUAL APP
         for(int i = 1; i < articleArr.size(); i++){
             ArticleCardModel cm = new ArticleCardModel(articleArr.get(i).getTitle(), articleArr.get(i).getAuthor(),
-                    articleArr.get(i).getDateToString(), articleCardImages[0], articleArr.get(i).getText());
+                    articleArr.get(i).getDateToString(), articleCardImages[i], articleArr.get(i).getText());
             articleCardModels.add(cm);
         }
     }
